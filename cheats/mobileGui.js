@@ -41,7 +41,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            ;(new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
+                ; (new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
         }
         window.alert = n.contentWindow.alert.bind(window);
         window.prompt = n.contentWindow.prompt.bind(window);
@@ -411,7 +411,7 @@
                 {
                     name: "Get Daily Rewards",
                     description: "Gets max daily tokens and xp",
-                    run: function () {
+                    run: async function () {
                         let i = document.createElement('iframe');
                         document.body.append(i);
                         window.alert = i.contentWindow.alert.bind(window);
@@ -419,27 +419,27 @@
                         if (!location.href.includes("play.blooket.com")) (alert("This cheat only works on play.blooket.com, opening a new tab."), window.open("https://play.blooket.com/"));
                         else {
                             const cache = Object.values(webpackJsonp.push([[], { ['']: (_, a, b) => { a.cache = b.c }, }, [['']],]).cache),
-                                axios = cache.find((x) => x.exports?.a?.get).exports.a;
-                            axios.post("https://play.blooket.com/api/playersessions/solo", {
-                                gameMode: "Factory",
-                                questionSetId: ["60101da869e8c70013913b59", "625db660c6842334835cb4c6", "60268f8861bd520016eae038", "611e6c804abdf900668699e3", "60ba5ff6077eb600221b7145", "642467af9b704783215c1f1b", "605bd360e35779001bf57c5e", "6234cc7add097ff1c9cff3bd", "600b1491d42a140004d5215a", "5db75fa3f1fa190017b61c0c", "5fac96fe2ca0da00042b018f", "600b14d8d42a140004d52165", "5f88953cdb209e00046522c7", "600b153ad42a140004d52172", "5fe260e72a505b00040e2a11", "5fe3d085a529560004cd3076", "5f5fc017aee59500041a1456", "608b0a5863c4f2001eed43f4", "5fad491512c8620004918ace", "5fc91a9b4ea2e200046bd49a", "5c5d06a7deebc70017245da7", "5ff767051b68750004a6fd21", "5fdcacc85d465a0004b021b9", "5fb7eea20bd44300045ba495"][Math.floor(Math.random() * 24)]
-                            }).then(async ({ data: { t } }) => {
-                                await axios.post("https://play.blooket.com/api/playersessions/landings", { t });
-                                const { name, blook: { name: blookUsed } } = await cache.find(x => x.exports.a?.me).exports.a.me({}).catch(() => alert('There was an error getting user data.'));
-                                await axios.put("https://play.blooket.com/api/users/factorystats", {
-                                    blookUsed, t, name,
-                                    cash: Math.floor(Math.random() * 90000000) + 10000000,
-                                    correctAnswers: Math.floor(Math.random() * 500) + 500,
-                                    upgrades: Math.floor(Math.random() * 300) + 300,
-                                    mode: "Time-Solo",
-                                    nameUsed: "You",
-                                    place: 1,
-                                    playersDefeated: 0,
-                                }).then(console.log);
-                                axios.put("https://play.blooket.com/api/users/add-rewards", { t, name, addedTokens: 500, addedXp: 300 })
-                                    .then(({ data: { dailyReward } }) => alert(`Added max tokens and xp, and got ${dailyReward} daily wheel tokens!`))
-                                    .catch(() => alert('There was an error when adding rewards.'));
+                                axios = cache.find((x) => x.exports?.a?.get).exports.a,
+                                { data: { t } } = await axios.post("https://play.blooket.com/api/playersessions/solo", {
+                                    gameMode: "Factory",
+                                    questionSetId: ["60101da869e8c70013913b59", "625db660c6842334835cb4c6", "60268f8861bd520016eae038", "611e6c804abdf900668699e3", "60ba5ff6077eb600221b7145", "642467af9b704783215c1f1b", "605bd360e35779001bf57c5e", "6234cc7add097ff1c9cff3bd", "600b1491d42a140004d5215a", "5db75fa3f1fa190017b61c0c", "5fac96fe2ca0da00042b018f", "600b14d8d42a140004d52165", "5f88953cdb209e00046522c7", "600b153ad42a140004d52172", "5fe260e72a505b00040e2a11", "5fe3d085a529560004cd3076", "5f5fc017aee59500041a1456", "608b0a5863c4f2001eed43f4", "5fad491512c8620004918ace", "5fc91a9b4ea2e200046bd49a", "5c5d06a7deebc70017245da7", "5ff767051b68750004a6fd21", "5fdcacc85d465a0004b021b9", "5fb7eea20bd44300045ba495"][Math.floor(Math.random() * 24)]
+                                });
+                            await axios.post("https://play.blooket.com/api/playersessions/landings", { t });
+                            await axios.get("https://play.blooket.com/api/playersessions/questions", { params: { t } });
+                            const { name, blook: { name: blookUsed } } = await cache.find(x => x.exports.a?.me).exports.a.me({}).catch(() => alert('There was an error getting user data.'));
+                            await axios.put("https://play.blooket.com/api/users/factorystats", {
+                                blookUsed, t, name,
+                                cash: Math.floor(Math.random() * 90000000) + 10000000,
+                                correctAnswers: Math.floor(Math.random() * 500) + 500,
+                                upgrades: Math.floor(Math.random() * 300) + 300,
+                                mode: "Time-Solo",
+                                nameUsed: "You",
+                                place: 1,
+                                playersDefeated: 0,
                             });
+                            axios.put("https://play.blooket.com/api/users/add-rewards", { t, name, addedTokens: 500, addedXp: 300 })
+                                .then(({ data: { dailyReward } }) => alert(`Added max tokens and xp, and got ${dailyReward} daily wheel tokens!`))
+                                .catch(() => alert('There was an error when adding rewards.'));
                         }
                     }
                 },
@@ -1000,12 +1000,101 @@
                         else if (Array.isArray(stateNode.state.unlocks)) stateNode.setState({ unlocks: Object.keys(blooks) });
                         else stateNode.setState({ unlocks: blooks });
                     }
+                }
+            ],
+            voyage: [
+                {
+                    name: "Max Levels",
+                    description: "Maxes out all islands and your boat",
+                    run: function () {
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
+                    }
                 },
                 {
-                    name: "Unlock Plus Gamemodes",
-                    description: "Allows you to play any gamemode that is plus only",
+                    name: "Set Doubloons",
+                    description: "Sets Doubloons",
                     run: function () {
-                        Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let doubloons = parseInt(prompt("How many doubloons do you want?")) || 0;
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ doubloons });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/d`,
+                            val: doubloons
+                        });
+                    }
+                },
+                {
+                    name: "Start Heist",
+                    description: "Starts a heist on someone",
+                    run: function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            const players = Object.entries(val || {}).reduce((a, [name, c]) => (name == stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
+                            if (players.length === 0) {
+                                stateNode.questionsToAnswer = 1;
+                                return void stateNode.randomQ();
+                            }
+                            const { name, blook, doubloons } = players.find(x => x.name == prompt("Who would you like to heist? (Defaults to top player if no one found)")) || players.sort((a, b) => b.doubloons - a.doubloons)[0];
+                            stateNode.setState({
+                                stage: "heist",
+                                heistInfo: { name, blook },
+                                prizeAmount: Math.max(1000, doubloons)
+                            });
+                        });
+                    }
+                },
+                {
+                    name: "Swap Doubloons",
+                    description: "Swaps Doubloons with someone",
+                    run: async function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == prompt("Who would you like to swap with? (Defaults to top player if no one found)")) || players[0];
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d - stateNode.state.doubloons}`
+                            }
+                        });
+                        stateNode.setState({ doubloons: target[1].d });
+                    }
+                },
+                {
+                    name: "Take Doubloons",
+                    description: "Takes Doubloons from someone",
+                    run: async function (player) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == prompt("Who would you like to take from? (Defaults to top player if no one found)")) || players[0];
+                        stateNode.setState({ doubloons: stateNode.state.doubloons + target[1].d });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d}`
+                            }
+                        });
                     }
                 }
             ],
@@ -2442,6 +2531,8 @@
             switch (window.location.pathname) {
                 case "/play/racing":
                     return capitalize ? "Racing" : "racing";
+                case "/play/pirate":
+                    return capitalize ? "Pirate's Voyage" : "voyage";
                 case "/play/factory":
                     return capitalize ? "Factory" : "factory";
                 case "/play/classic/get-ready":
@@ -2511,7 +2602,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1694126388262 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1696542129460 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

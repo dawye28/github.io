@@ -39,7 +39,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            ;(new Image).src = "https://gui-logger.onrender.com/gui/2?" + Date.now();
+                ; (new Image).src = "https://gui-logger.onrender.com/gui/2?" + Date.now();
         }
         
         let { webpack } = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]);
@@ -265,7 +265,7 @@
                     {
                         name: "Get Daily Rewards",
                         description: "Gets max daily tokens and xp",
-                        run: function () {
+                        run: async function () {
                             let i = document.createElement('iframe');
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
@@ -273,27 +273,27 @@
                             if (!location.href.includes("play.blooket.com")) (alert("This cheat only works on play.blooket.com, opening a new tab."), window.open("https://play.blooket.com/"));
                             else {
                                 const cache = Object.values(webpackJsonp.push([[], { ['']: (_, a, b) => { a.cache = b.c }, }, [['']],]).cache),
-                                    axios = cache.find((x) => x.exports?.a?.get).exports.a;
-                                axios.post("https://play.blooket.com/api/playersessions/solo", {
-                                    gameMode: "Factory",
-                                    questionSetId: ["60101da869e8c70013913b59", "625db660c6842334835cb4c6", "60268f8861bd520016eae038", "611e6c804abdf900668699e3", "60ba5ff6077eb600221b7145", "642467af9b704783215c1f1b", "605bd360e35779001bf57c5e", "6234cc7add097ff1c9cff3bd", "600b1491d42a140004d5215a", "5db75fa3f1fa190017b61c0c", "5fac96fe2ca0da00042b018f", "600b14d8d42a140004d52165", "5f88953cdb209e00046522c7", "600b153ad42a140004d52172", "5fe260e72a505b00040e2a11", "5fe3d085a529560004cd3076", "5f5fc017aee59500041a1456", "608b0a5863c4f2001eed43f4", "5fad491512c8620004918ace", "5fc91a9b4ea2e200046bd49a", "5c5d06a7deebc70017245da7", "5ff767051b68750004a6fd21", "5fdcacc85d465a0004b021b9", "5fb7eea20bd44300045ba495"][Math.floor(Math.random() * 24)]
-                                }).then(async ({ data: { t } }) => {
-                                    await axios.post("https://play.blooket.com/api/playersessions/landings", { t });
-                                    const { name, blook: { name: blookUsed } } = await cache.find(x => x.exports.a?.me).exports.a.me({}).catch(() => alert('There was an error getting user data.'));
-                                    await axios.put("https://play.blooket.com/api/users/factorystats", {
-                                        blookUsed, t, name,
-                                        cash: Math.floor(Math.random() * 90000000) + 10000000,
-                                        correctAnswers: Math.floor(Math.random() * 500) + 500,
-                                        upgrades: Math.floor(Math.random() * 300) + 300,
-                                        mode: "Time-Solo",
-                                        nameUsed: "You",
-                                        place: 1,
-                                        playersDefeated: 0,
+                                    axios = cache.find((x) => x.exports?.a?.get).exports.a,
+                                    { data: { t } } = await axios.post("https://play.blooket.com/api/playersessions/solo", {
+                                        gameMode: "Factory",
+                                        questionSetId: ["60101da869e8c70013913b59", "625db660c6842334835cb4c6", "60268f8861bd520016eae038", "611e6c804abdf900668699e3", "60ba5ff6077eb600221b7145", "642467af9b704783215c1f1b", "605bd360e35779001bf57c5e", "6234cc7add097ff1c9cff3bd", "600b1491d42a140004d5215a", "5db75fa3f1fa190017b61c0c", "5fac96fe2ca0da00042b018f", "600b14d8d42a140004d52165", "5f88953cdb209e00046522c7", "600b153ad42a140004d52172", "5fe260e72a505b00040e2a11", "5fe3d085a529560004cd3076", "5f5fc017aee59500041a1456", "608b0a5863c4f2001eed43f4", "5fad491512c8620004918ace", "5fc91a9b4ea2e200046bd49a", "5c5d06a7deebc70017245da7", "5ff767051b68750004a6fd21", "5fdcacc85d465a0004b021b9", "5fb7eea20bd44300045ba495"][Math.floor(Math.random() * 24)]
                                     });
-                                    axios.put("https://play.blooket.com/api/users/add-rewards", { t, name, addedTokens: 500, addedXp: 300 })
-                                        .then(({ data: { dailyReward } }) => alert(`Added max tokens and xp, and got ${dailyReward} daily wheel tokens!`))
-                                        .catch(() => alert('There was an error when adding rewards.'));
+                                await axios.post("https://play.blooket.com/api/playersessions/landings", { t });
+                                await axios.get("https://play.blooket.com/api/playersessions/questions", { params: { t } });
+                                const { name, blook: { name: blookUsed } } = await cache.find(x => x.exports.a?.me).exports.a.me({}).catch(() => alert('There was an error getting user data.'));
+                                await axios.put("https://play.blooket.com/api/users/factorystats", {
+                                    blookUsed, t, name,
+                                    cash: Math.floor(Math.random() * 90000000) + 10000000,
+                                    correctAnswers: Math.floor(Math.random() * 500) + 500,
+                                    upgrades: Math.floor(Math.random() * 300) + 300,
+                                    mode: "Time-Solo",
+                                    nameUsed: "You",
+                                    place: 1,
+                                    playersDefeated: 0,
                                 });
+                                axios.put("https://play.blooket.com/api/users/add-rewards", { t, name, addedTokens: 500, addedXp: 300 })
+                                    .then(({ data: { dailyReward } }) => alert(`Added max tokens and xp, and got ${dailyReward} daily wheel tokens!`))
+                                    .catch(() => alert('There was an error when adding rewards.'));
                             }
                         }
                     },
@@ -970,12 +970,132 @@
                                 }
                             } catch { }
                         })()
+                    }
+                ],
+            },
+            voyage: {
+                name: "Pirate's Voyage",
+                img: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPjxnIGlkPSJCb2F0Ij48cGF0aCBkPSJNMTcwLjQsNTYuMDU0Yy02OC43ODgsMTAuMTc0IC0xMTUuOTcxLDU2LjkzOCAtMTQ1LjQxMSwxMzMuNzVsMTUuNDY5LDcuNzM0YzMwLjk2MiwtMjguMTc1IDc0LjcwNSwtMzcuNzg3IDEzMi4zMjIsLTI3LjI1bDAsLTE3LjYxMWMtMjUuNjI5LC0yNy45NTIgLTI2Ljk2NiwtNTYuNzcyIDAuNzE0LC04Ni42MjhsLTMuMDk0LC05Ljk5NVoiIHN0eWxlPSJmaWxsOiNmNmUwYmQ7Ii8+PHBhdGggZD0iTTE5OS42NzMsNjAuODEzYzMyLjc4NCw0Mi45ODIgNjUuODIyLDkwLjg4NyA5Ny4zMzcsMTM5LjU4MWwtNi42NjMsMGMtMTIuMDg1LC0zMS4xMTEgLTU3Ljg4MiwtMzkuNjk0IC05MS42MjYsLTI3LjI1YzIyLjUxNCwtMzQuNTc5IDE3Ljc5NiwtNzIuNjczIDAuOTUyLC0xMTIuMzMxWiIgc3R5bGU9ImZpbGw6I2Y2ZTBiZDsiLz48cGF0aCBkPSJNNjkuNDQ4LDE5Ny41MzhjMCwwIC01OS43MDcsLTE1LjI0MyAtNjguMzk4LC0xNy40NjJjLTAuMDc2LC0wLjAxOSAtMC4xNTQsMC4wMiAtMC4xODQsMC4wOTJjLTAuMDMsMC4wNzIgLTAuMDAyLDAuMTU1IDAuMDY1LDAuMTk1YzkuNjgyLDUuNzc1IDkxLjY0Nyw1NC42NTggOTEuNjQ3LDU0LjY1OGwtMjMuMTMsLTM3LjQ4M1oiIHN0eWxlPSJmaWxsOiM4ZDZlNDE7Ii8+PHBhdGggZD0iTTE2NC40NSw0Ny45MDNjMCwtNS4zNTMgNC4zNDYsLTkuNjk4IDkuNjk4LC05LjY5OGwxOS4zOTcsLTBjNS4zNTIsLTAgOS42OTgsNC4zNDUgOS42OTgsOS42OThsLTAsMTU2Ljk1M2MtMCw1LjM1MyAtNC4zNDYsOS42OTggLTkuNjk4LDkuNjk4bC0xOS4zOTcsMGMtNS4zNTIsMCAtOS42OTgsLTQuMzQ1IC05LjY5OCwtOS42OThsMCwtMTU2Ljk1M1oiIHN0eWxlPSJmaWxsOiM3ZjY4NDU7Ii8+PHBhdGggZD0iTTI2My45OTMsMjU2LjEwM2MyMi4xNzEsLTE0LjcxIDM2LjAwNywtMzUuNTE1IDM2LjAwNywtNTguNTY1bC0yMzAuNTUyLDBjMCwyMy43MTMgMTQuNjQzLDQ1LjA1IDM3Ljk0LDU5LjgxOWM5Ljg3NSwtMy43MjkgMjAuMDQxLC0xMS4zMzQgMzAuNDYzLC0yMi4zMzZjMzIuODExLDM1LjQ1NSA2NC4wNjksMzUuOTQzIDkzLjcwOCwwYzYuODM4LDkuNjc3IDE3LjczNiwxNi42NDYgMzIuNDM0LDIxLjA4MloiIHN0eWxlPSJmaWxsOiNiNjkyNWY7Ii8+PC9nPjwvc3ZnPg==",
+                cheats: [
+                    {
+                        name: "Max Levels",
+                        description: "Maxes out all islands and your boat",
+                        run: function () {
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
+                        }
                     },
                     {
-                        name: "Unlock Plus Gamemodes",
-                        description: "Allows you to play any gamemode that is plus only",
-                        run: function () {
-                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+                        name: "Set Doubloons",
+                        description: "Sets Doubloons",
+                        inputs: [{
+                            name: "Amount",
+                            type: "number"
+                        }],
+                        run: function (doubloons) {
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            window.prompt = i.contentWindow.prompt.bind(window);
+                            i.remove();
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            stateNode.setState({ doubloons });
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}/d`,
+                                val: doubloons
+                            });
+                        }
+                    },
+                    {
+                        name: "Start Heist",
+                        description: "Starts a heist on someone",
+                        inputs: [{
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                                return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                            }
+                        }],
+                        run: function (target) {
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            window.prompt = i.contentWindow.prompt.bind(window);
+                            i.remove();
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        
+                            stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                                const players = Object.entries(val || {}).reduce((a, [name, c]) => (name == stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
+                                if (players.length === 0) {
+                                    stateNode.questionsToAnswer = 1;
+                                    return void stateNode.randomQ();
+                                }
+                                const { name, blook, doubloons } = players.find(x => x.name == target) || players.sort((a, b) => b.doubloons - a.doubloons)[0];
+                                stateNode.setState({
+                                    stage: "heist",
+                                    heistInfo: { name, blook },
+                                    prizeAmount: Math.max(1000, doubloons)
+                                });
+                            });
+                        }
+                    },
+                    {
+                        name: "Swap Doubloons",
+                        description: "Swaps Doubloons with someone",
+                        inputs: [{
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                                return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                            }
+                        }],
+                        run: async function (player) {
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            window.prompt = i.contentWindow.prompt.bind(window);
+                            i.remove();
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                                target = players.find(x => x[0] == player) || players[0];
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}`,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    d: target[1].d,
+                                    tat: `${target[0]}:${target[1].d - stateNode.state.doubloons}`
+                                }
+                            });
+                            stateNode.setState({ doubloons: target[1].d });
+                        }
+                    },
+                    {
+                        name: "Take Doubloons",
+                        description: "Takes Doubloons from someone",
+                        inputs: [{
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                                return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                            }
+                        }],
+                        run: async function (player) {
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            window.prompt = i.contentWindow.prompt.bind(window);
+                            i.remove();
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                                target = players.find(x => x[0] == player) || players[0];
+                            stateNode.setState({ doubloons: stateNode.state.doubloons + target[1].d });
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}`,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    d: target[1].d,
+                                    tat: `${target[0]}:${target[1].d}`
+                                }
+                            });
                         }
                     }
                 ],
@@ -3351,7 +3471,7 @@
             const alertInterval = useRef();
             settings = useSettings("JODGUISETTINGS");
             const variables = React.createElement("style", null, `:root {--backgroundColor: ${settings.data?.theme?.backgroundColor || "rgb(11, 194, 207)"};--infoColor: ${settings.data?.theme?.infoColor || "#9a49aa"};--cheatList: ${settings.data?.theme?.cheatList || "#9a49aa"};--defaultButton: ${settings.data?.theme?.defaultButton || "#9a49aa"};--disabledButton: ${settings.data?.theme?.disabledButton || "#A02626"};--enabledButton: ${settings.data?.theme?.enabledButton || "#47A547"};--textColor: ${settings.data?.theme?.textColor || "white"};--inputColor: ${settings.data?.theme?.inputColor || "#7a039d"};--contentBackground: ${settings.data?.theme?.contentBackground || "rgb(64, 17, 95)"};}`);
-            const { current: gamemodes } = useRef(["alerts", "global", "gold", "cafe", "crypto", "dinos", "defense", "defense2", "factory", "fishing", "flappy", "doom", "kingdom", "racing", "royale", "rush", "brawl", "workshop", "settings"]);
+            const { current: gamemodes } = useRef(["alerts", "global", "voyage", "gold", "cafe", "crypto", "dinos", "defense", "defense2", "factory", "fishing", "flappy", "doom", "kingdom", "racing", "royale", "rush", "brawl", "workshop", "settings"]);
         
             const close = useCallback(() => {
                 ReactDOM.unmountComponentAtNode(GUIContainer);
@@ -3517,7 +3637,7 @@
             }))))))))));
         }
         ReactDOM.render(createElement(GUI, null), GUIContainer);
-        document.body.prepend(GUIContainer);
+        document.body.append(GUIContainer);
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/reactGui.png?" + Date.now();
@@ -3535,7 +3655,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1694225981451 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1696542129466 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
